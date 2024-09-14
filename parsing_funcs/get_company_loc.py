@@ -3,10 +3,6 @@ from xml.etree import ElementTree
 import requests
 import pandas as pd
 
-sum_revenue = 0
-with open('../data/ids.txt', 'r') as file:
-    ids = [idd[:-2] for idd in file.readlines()]
-
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36',
     'Accept': "*/*"
@@ -19,7 +15,7 @@ ns = {
     'ymaps': 'http://maps.yandex.ru/ymaps/1.x'
 }
 
-params = {"apikey": "*******************", "geocode": "", "lang": "ru_RU"}
+params = {"apikey": "*******-****-****-****-************", "geocode": "", "lang": "ru_RU"}
 
 
 def read_company_data(filepath):
@@ -30,7 +26,6 @@ def read_company_data(filepath):
 
 
 df = read_company_data('../data/company_info.csv')
-df = df.sort_values(by='Выручка', ascending=False, ignore_index=True).head(500)
 
 with open("../data/locations.csv", "w", encoding='utf-8') as file:
     file_writer = csv.writer(file, delimiter="=", lineterminator="\r")

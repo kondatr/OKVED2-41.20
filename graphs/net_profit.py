@@ -145,14 +145,15 @@ def net_profit_change_graph():
 
     ax1.set_ylim(40, 65)
     ax1.set_xlabel(' ')
-    ax1.set_ylabel(' ')
+    ax1.set_ylabel('Проценты', color='blue')
     ax1.tick_params(axis='y', labelcolor='blue')
 
     ax2 = ax1.twinx()
+    ax2.set_ylabel('Количество компаний', rotation=270)
     ax2.set_ylim(2000, 12000)
 
     bar2 = sns.lineplot(ax=ax2, x=x, y=y2, legend=False, color='brown', linewidth=3,
-                        label='Количество компаний')
+                        label='Всего компаний')
     bar3 = sns.lineplot(ax=ax2, x=x, y=y3, legend=False, color='green', linewidth=3,
                         label='Компании (рост чистой прибыли)')
     bar4 = sns.lineplot(ax=ax2, x=x, y=y4, legend=False, color='red', linewidth=3,

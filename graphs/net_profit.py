@@ -57,6 +57,7 @@ def growth_years_graph():
         df, df_full, totals = get_formal_data(i)
         # Убираем оси у "контейнера" ax
         ax.axis('off')
+        print(sum(df['x*y'])/sum(df['y']))
 
         # Большой график
         ax_main = fig.add_subplot(plt.GridSpec(4, 4)[i, 0:3])

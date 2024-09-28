@@ -129,17 +129,38 @@ def net_profit_graph():
 
 
 def net_profit_change_graph():
-    fig, ax = plt.subplots(1, figsize=(10, 7))
-    y = []
+    fig, ax1 = plt.subplots(1, figsize=(10, 9))
+    y1, y2, y3, y4 = [], [], [], []
     x = ['Спустя 1 год', 'Спустя 2 года', 'Спустя 3 года', 'Спустя 4 года']
     for i in range(4):
         _, _, totals = get_formal_data(i)
-        y.append(totals['Количество'][1]-totals['Количество'][0])
+        y1.append(round(totals['Количество'][1]/sum(totals['Количество']), 4)*100)
+        y2.append(sum(totals['Количество']))
+        y3.append(totals['Количество'][1])
+        y4.append(totals['Количество'][0])
 
-    bar = sns.barplot(x=y, y=x, hue=x, legend=False)
-    for index, value in enumerate(y):
-        bar.text(value + 0.1, index, value, va='center')
+    bar1 = sns.lineplot(ax=ax1, x=x, y=y1, legend=False, linewidth=5, linestyle='--',
+                        label='Доля компаний с положительной динамикой, %')
+    ax1.fill_between(x, 0, y1, color=sns.color_palette()[0], alpha=0.6)
 
-    ax.set_xlabel(' ')
-    ax.set_ylabel(' ')
-    ax.set_title('Разница между количеством компаний (рост - падение)', fontsize=16, weight='bold')
+    ax1.set_ylim(40, 65)
+    ax1.set_xlabel(' ')
+    ax1.set_ylabel(' ')
+    ax1.tick_params(axis='y', labelcolor='blue')
+
+    ax2 = ax1.twinx()
+    ax2.set_ylim(2000, 12000)
+
+    bar2 = sns.lineplot(ax=ax2, x=x, y=y2, legend=False, color='brown', linewidth=3,
+                        label='Количество компаний')
+    bar3 = sns.lineplot(ax=ax2, x=x, y=y3, legend=False, color='green', linewidth=3,
+                        label='Компании (рост чистой прибыли)')
+    bar4 = sns.lineplot(ax=ax2, x=x, y=y4, legend=False, color='red', linewidth=3,
+                        label='Компании (падение чистой прибыли)')
+
+    handles1, labels1 = ax1.get_legend_handles_labels()
+    handles2, labels2 = ax2.get_legend_handles_labels()
+    handles = handles1 + handles2
+    labels = labels1 + labels2
+    fig.legend(handles, labels, loc='upper right', bbox_to_anchor=(0.9, 0.95), borderaxespad=0.1)
+

@@ -57,7 +57,6 @@ def growth_years_graph():
         df, df_full, totals = get_formal_data(i)
         # Убираем оси у "контейнера" ax
         ax.axis('off')
-        print(sum(df['x*y'])/sum(df['y']))
 
         # Большой график
         ax_main = fig.add_subplot(plt.GridSpec(4, 4)[i, 0:3])
@@ -163,5 +162,5 @@ def net_profit_change_graph():
     handles2, labels2 = ax2.get_legend_handles_labels()
     handles = handles1 + handles2
     labels = labels1 + labels2
-    fig.legend(handles, labels, loc='upper right', bbox_to_anchor=(0.9, 0.95), borderaxespad=0.1)
+    fig.legend(handles, labels, loc='upper right', bbox_to_anchor=(0.87, 0.85), borderaxespad=0.1)
 
